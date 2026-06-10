@@ -1,29 +1,27 @@
 package oops.day05;
 
-import java.util.*;
+import java.util.Arrays;
 
 public class hello {
 
-    public static int maxSubArray(int[] nums) {
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
+    public static void setZeroes(int[] nums) {
 
-        for (int i = 0; i < nums.length; i++) {
-            sum += nums[i];
-
-            max = Math.max(sum, max);
-
-            if (sum < 0) {
-                sum = 0; // Reset negative sum
+        int i=0;
+        for(int j= nums.length-1;j>=0;j--){
+            if(nums[j]==0){
+                int temp=nums[nums.length-j];
+                nums[nums.length-j]=nums[i];
+                nums[i]=temp;
+                i++;
             }
         }
-
-        return max;
     }
 
     public static void main(String[] args) {
+        int[] nums={4,5,0,1,9,0,5,0};
+        setZeroes(nums);
+        System.out.println(Arrays.toString(nums));
 
-        int[] nums1 = {2,-5,1,7,-3,4,-6};
-        System.out.println("Maximum Subarray Sum: " + maxSubArray(nums1));
+
     }
 }
