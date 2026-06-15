@@ -1,4 +1,4 @@
-package LinkedList;
+package collections;
 
 public class LL {
 
