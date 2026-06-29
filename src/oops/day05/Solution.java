@@ -1,46 +1,36 @@
 package oops.day05;
-
 import java.util.*;
 
-import java.util.Arrays;
-
 class Solution {
+    public List<Integer> majorityElement(int[] nums) {
 
-    public int[] productExceptSelf(int[] nums) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        List<Integer> result = new ArrayList<>();
 
         int n = nums.length;
 
-        int[] answer = new int[n];
-
-        // Prefix products
-        answer[0] = 1;
-
-        for(int i = 1; i < n; i++) {
-
-            answer[i] = answer[i - 1] * nums[i - 1];
+        // Count frequency
+        for(int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
-
-        // Suffix products
-        int suffix = 1;
-
-        for(int i = n - 1; i >= 0; i--) {
-
-            answer[i] = answer[i] * suffix;
-
-            suffix = suffix * nums[i];
+        // Find elements with frequency > n/3
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if(entry.getValue() > n / 3) {
+                result.add(entry.getKey());
+            }
         }
-
-        return answer;
+        return result;
     }
-
+    // Main method
     public static void main(String[] args) {
 
         Solution obj = new Solution();
 
-        int[] nums = {1, 2, 3, 4};
+        int[] nums = {1, 2, 1, 1, 3, 2};
 
-        int[] result = obj.productExceptSelf(nums);
+        List<Integer> ans = obj.majorityElement(nums);
 
-        System.out.println(Arrays.toString(result));
+        System.out.println(ans);
     }
 }
